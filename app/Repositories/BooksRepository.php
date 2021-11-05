@@ -15,7 +15,7 @@ class BooksRepository
 
     public function getMyBooks()
     {
-        return $this->model->with('typeInterest')->where('user_id', auth()->id())->get();
+        return $this->model->where('user_id', auth()->id())->get();
     }
 
     public function storeNewBook(array $data)
@@ -26,7 +26,6 @@ class BooksRepository
     public function getBookByUuid(string $identify)
     {
         return $this->model
-                    ->with('typeInterest')
                     ->where('user_id', auth()->id())
                     ->where('uuid', $identify)
                     ->firstOrFail();

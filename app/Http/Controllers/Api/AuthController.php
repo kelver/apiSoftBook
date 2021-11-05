@@ -3,6 +3,7 @@ namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
@@ -53,10 +54,12 @@ class AuthController extends Controller
      */
     protected function respondWithToken($token)
     {
+        $user = json_encode(Auth::user());
         return response()->json([
             'access_token' => $token,
             'token_type' => 'bearer',
-            'expires_in' => auth('api')->factory()->getTTL() * 60
+            'expires_in' => auth('api')->factory()->getTTL() * 60,
+            'me' => $user
         ]);
     }
 }
