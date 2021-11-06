@@ -7,6 +7,11 @@ use App\Http\Controllers\Api\{
 use Illuminate\Support\Facades\Route;
 
 Route::post('/auth/login', [AuthController::class, 'login']);
+Route::get('/', function(){
+    return response()->json([
+        'message' => 'success'
+    ]);
+});
 
 Route::group(['middleware' => ['apiJwt']], function () {
     Route::put('/books/{identify}', [BooksController::class, 'update']);
