@@ -15,7 +15,7 @@ class BooksRepository
 
     public function getMyBooks()
     {
-        return $this->model->where('user_id', auth()->id())->paginate(6);
+        return $this->model->where('user_id', auth()->id())->orderByDesc('id')->paginate(6);
     }
 
     public function storeNewBook(array $data)
