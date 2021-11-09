@@ -34,6 +34,15 @@ Rode o comando para gerar a key secret do _JWT_
 php artisan jwt:secret
 ```
 
+## FrontEnd
+
+A aplicação se trata de uma api, o front end que a consome, se encontra nesse respositório:
+```sh
+https://github.com/kelver/frontSoftBook
+```
+Para executar, apenas confira a url de consumo da api, se está de acordo com a url da sua aplicação.
+
+
 ## License
 
 MIT
