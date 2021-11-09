@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\Books;
 use App\Repositories\BooksRepository;
 
 class BooksService
@@ -16,6 +17,11 @@ class BooksService
     public function getMyBooks()
     {
         return $this->repository->getMyBooks();
+    }
+
+    public function searchMyBooks(string $search)
+    {
+        return $this->repository->searchMyBooks($search);
     }
 
     public function storeNewBook(array $data)

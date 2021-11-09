@@ -18,6 +18,18 @@ class BooksRepository
         return $this->model->where('user_id', auth()->id())->orderByDesc('id')->paginate(6);
     }
 
+    public function searchMyBooks($search)
+    {
+        return $this->model->where('user_id', auth()->id())
+                    ->where(function($q) use ($search){
+                        $q->where('title', 'like', "%{$search}%")
+                            ->orWhere('description', 'like', "%{$search}%")
+                            ->orWhere('author', 'like', "%{$search}%");
+                    })
+                    ->orderByDesc('id')
+                    ->paginate(6);
+    }
+
     public function storeNewBook(array $data)
     {
         return $this->model->create($data);

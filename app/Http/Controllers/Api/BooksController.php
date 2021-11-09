@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUpdateBook;
+use App\Http\Requests\ValidateSearch;
 use App\Http\Resources\BooksResource;
 use App\Services\BooksService;
+use Illuminate\Support\Str;
 
 class BooksController extends Controller
 {
@@ -24,6 +26,19 @@ class BooksController extends Controller
     public function index()
     {
         $books = $this->bookService->getMyBooks();
+
+        return BooksResource::collection($books);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function search(ValidateSearch $request)
+    {
+        $search = $request->validated();
+        $books = $this->bookService->searchMyBooks($search['search']);
 
         return BooksResource::collection($books);
     }
