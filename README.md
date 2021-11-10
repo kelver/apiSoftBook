@@ -40,7 +40,16 @@ A aplicação se trata de uma api, o front end que a consome, se encontra nesse 
 ```sh
 https://github.com/kelver/frontSoftBook
 ```
-Para executar, apenas confira a url de consumo da api, se está de acordo com a url da sua aplicação.
+Para executar, apenas confira a url de consumo da api, se está de acordo com a url da sua aplicação no arquivo:.
+```sh
+/assets/js/main.js
+```
+Altere a linha:
+```sh
+let URLAPI = 'http://localhost:8081/api/';
+```
+para a URI da sua API.
+
 
 
 ## License
