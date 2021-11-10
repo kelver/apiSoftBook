@@ -19,7 +19,7 @@ O ambiente deve estar rodando no navegador em:
 http://localhost
 ```
 
-Com o ambiente configurado, entre na pasta _testSmPlaces_, e instale as dependências do projeto:
+Com o ambiente configurado, entre na pasta _apiSoftBook_, ou na raiz do projeto, e instale as dependências do projeto:
 ```sh
 composer install
 ```
