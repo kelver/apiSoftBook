@@ -1,9 +1,11 @@
 <?php
 namespace App\Http\Controllers\Api;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
@@ -14,7 +16,6 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login', 'register']]);
     }
 
     /**
@@ -43,6 +44,25 @@ class AuthController extends Controller
         auth()->logout();
 
         return response()->json(['message' => 'Successfully logged out']);
+    }
+
+    public function store(Request $request)
+    {
+        $data = $this->validate($request, [
+            'name' => 'required',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required'
+        ]);
+
+        $data['password'] = Hash::make($data['password']);
+        $user = User::create($data);
+
+        $credentials = $request->only(['email', 'password']);
+        if (!$token = auth('api')->attempt($credentials)) {
+            return response()->json(['error' => 'Unauthorized'], 401);
+        }
+
+        return $this->respondWithToken($token);
     }
 
     /**
